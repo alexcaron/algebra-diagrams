@@ -1,4 +1,5 @@
 import React from 'react';
+import Step from './components/Step.jsx';
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
       </div>
     </div>
     <div className='app-content'>
-
+      <Step />
     </div>
     </>
   )
