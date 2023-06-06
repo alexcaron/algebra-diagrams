@@ -1,0 +1,17 @@
+#app {
+  max-width: 800px;
+  margin: 20px auto 20px auto;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-bar-right {
+  width: 200px;
+  font-size: smaller;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
