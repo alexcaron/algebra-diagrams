@@ -15,3 +15,17 @@
   justify-content: space-between;
   align-items: end;
 }
+
+.step {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 30px;
+}
+
+.equation-content {
+  display: flex;
+}
+
+.equation-content > input{
+  margin-left: 10px;
+}
