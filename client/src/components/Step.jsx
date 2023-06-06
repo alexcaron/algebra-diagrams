@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
-import Editor from './Editor.jsx';
-
+import {ComputeEngine} from '@cortex-js/compute-engine';
 const Step = () => {
   const [editing, setEditing] = useState(true);
   const [equation, setEquation] = useState('');
+  const update = (e) => {
+    console.log(e.target.getValue('math-json'));
+  };
+
   return (
     <div className='step'>
-      <Editor active={editing} setEquation={setEquation}/>
       <div className='equation-content'>
-        <div>{equation}</div>
-        <math-field>f(x) = \sin(x+\pi)</math-field>
+        <math-field onInput={e=>update(e)}>3x+10 = 25</math-field>
       </div>
       <div className='diagram-content'>
+        <div>diagram here</div>
       </div>
     </div>
   );
