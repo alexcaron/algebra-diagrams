@@ -1,16 +1,26 @@
 import React from 'react';
 import Block from './Block.jsx';
 
-const Tape = ({expression}) => {
+const Tape = ({expression, resizable, reversed}) => {
   return (
-    <div className='tape'>
+    <div className={`tape ${resizable} ${reversed}`}>
       { typeof expression !== 'object'
-      ? <Block value={expression} border='dashed' color='green' />
+      ? <Block
+          value={expression}
+          border={typeof expression === 'number' ? 'solid' : 'dashed'}
+          color={expression.toString()[0] === '-' ? 'red' : 'green'}
+          reversed={reversed}
+        />
       : expression[0] === 'Add'
-      ? expression.slice(1).map(e => <Tape expression={e}/>)
+      ? expression.slice(1).map((e,i) => <Tape key={i} expression={e} resizable='resizable' reversed=''/>)
       : expression[0] === 'Multiply'
-      ? Array(expression[1]).fill(1).map((e,i) => <Tape key={i} expression={expression[2]}/>)
-      : null }
+      ? Array(expression[1]).fill(1).map((e,i) => <Tape key={i} expression={expression[2]} resizable='' reversed=''/>)
+      : expression[0] === 'Subtract'
+      ? (<div className='tape stackable outline'>
+          {expression.slice(1).map((e,i) => <Tape key={i} expression={i % 2 === 0 ? e : (typeof e === 'number') ? -e : '-'+ e} resizable='resizable' reversed={i % 2 === 0 ? '' : 'reversed'}/>)}
+        </div>)
+      : null
+    }
     </div>
   )
 };
