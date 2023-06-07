@@ -128,3 +128,16 @@
   padding: 10px;
   margin: 0 10px;
 }
+
+.denominator {
+  margin: 0 auto;
+  height: auto;
+}
+
+.bracket {
+  margin-top: 5px;
+  height: 5px;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: black;
+}
