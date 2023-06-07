@@ -12,7 +12,7 @@ const App = () => {
       </div>
     </div>
     <div className='app-content'>
-      <Step />
+      <Step head={true}/>
     </div>
     </>
   )
