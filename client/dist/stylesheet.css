@@ -38,9 +38,12 @@
 
 .tape {
   display: flex;
-  justify-content: space-evenly;
   min-height: 30px;
   width: 100%;
+}
+.diagram > .tape {
+  border: 1px solid lightgray;
+  padding: 4px;
 }
 
 .block {
@@ -80,7 +83,10 @@
 .stackable {
   display: flex;
   flex-direction: column;
-  align-items: end;
+}
+
+.stackable > .reversed {
+  align-self: end;
 }
 
 .reversed {
