@@ -33,16 +33,17 @@
 .diagram {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 500px;
 }
 
 .tape {
   display: flex;
   justify-content: space-evenly;
-  height: 25px;
+  height: 30px;
+  width: 100%;
 }
 
-.tape, .block {
+.block {
   width: 100%;
   text-align: center;
 }
@@ -50,4 +51,24 @@
 .green-dashed {
   background-color: lightgreen;
   border: 1px dashed darkgreen;
+}
+
+.green-solid {
+  background-color: lightgreen;
+  border: 1px solid darkgreen;
+}
+
+.red-dashed {
+  background-color: rgb(247, 140, 140);
+  border: 1px dashed orangered;
+}
+
+.red-solid {
+  background-color: rgb(247, 140, 140);
+  border: 1px solid orangered;
+}
+
+.resizable {
+  resize: horizontal;
+  overflow: hidden;
 }
