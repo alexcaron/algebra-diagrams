@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
-const Block = ({value, color, border}) => {
+const Block = ({value, color, border, reversed}) => {
   return (
-    <div className={`block ${color}-${border}`}>
+    <div className={`block ${color}-${border} ${reversed}`}>
       {value}
     </div>
   )

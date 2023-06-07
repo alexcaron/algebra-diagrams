@@ -39,7 +39,7 @@
 .tape {
   display: flex;
   justify-content: space-evenly;
-  height: 30px;
+  min-height: 30px;
   width: 100%;
 }
 
@@ -71,4 +71,18 @@
 .resizable {
   resize: horizontal;
   overflow: hidden;
+}
+
+.space {
+  height: 5px;
+}
+
+.stackable {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.reversed {
+  transform: scaleX(-1);
 }
