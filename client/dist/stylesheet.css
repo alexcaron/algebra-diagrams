@@ -41,6 +41,7 @@
   min-height: 30px;
   width: 100%;
 }
+
 .diagram > .tape {
   border: 1px solid lightgray;
   padding: 4px;
@@ -48,7 +49,12 @@
 
 .block {
   width: 100%;
+  min-height: 30px;
   text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto;
 }
 
 .green-dashed {
@@ -91,4 +97,23 @@
 
 .reversed {
   transform: scaleX(-1);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: black;
+}
+
+.dot-variable {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  border-style: dashed;
+  background-color: white;
+}
+
+.add-step-button {
+  margin: 0 auto;
 }
