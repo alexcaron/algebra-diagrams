@@ -19,13 +19,35 @@
 .step {
   display: flex;
   justify-content: space-between;
-  margin: 0 30px;
+  margin: 30px 0;
 }
 
 .equation-content {
   display: flex;
 }
 
-.equation-content > input{
+.equation-content > input {
   margin-left: 10px;
+}
+
+.diagram {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.tape {
+  display: flex;
+  justify-content: space-evenly;
+  height: 25px;
+}
+
+.tape, .block {
+  width: 100%;
+  text-align: center;
+}
+
+.green-dashed {
+  background-color: lightgreen;
+  border: 1px dashed darkgreen;
 }

@@ -1,8 +1,13 @@
 import React from 'react';
+import Tape from './Tape.jsx';
 
 const Diagram = ({equation}) => {
+  console.log(equation);
   return (
-    <div>{equation}</div>
+    <div className='diagram'>
+      <Tape expression={equation[2]}/>
+      <Tape expression={equation[1]}/>
+    </div>
   );
 };
 
