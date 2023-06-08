@@ -7,15 +7,23 @@ const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head 
   const [inputEquation, setInputEquation] = useState(equationStart);
   const [displayEquation, setDisplayEquation] = useState(equationStart);
   const [hasNextStep, setHasNextStep] = useState(false);
+  const [userDescriptionStep, setUserDescriptionStep] = useState('');
 
   return (
     <>
     <div className='step'>
       <div>
-        <div className='equation-content'>
-          <math-field onInput={e=>setInputEquation(JSON.parse(e.target.getValue('math-json')))}> {ce.serialize(inputEquation)} </math-field>
-          <input type='button' value='show' onClick={e=>setDisplayEquation(inputEquation)} disabled={inputEquation===displayEquation}/>
-        </div>
+        {
+          head
+          ? (<div className='equation-content'>
+              <math-field onInput={e=>setInputEquation(JSON.parse(e.target.getValue('math-json')))}> {ce.serialize(inputEquation)} </math-field>
+              <input type='button' value='show' onClick={e=>setDisplayEquation(inputEquation)} disabled={inputEquation===displayEquation}/>
+            </div>)
+          : (<div className='equation-content-solving'>
+              <math-field read-only> {ce.serialize(inputEquation)} </math-field>
+              <div className='user-input-step'><math-field></math-field><math-field></math-field></div>
+            </div>)
+        }
       </div>
       <div className='diagram-content'>
         <Diagram equation={displayEquation}/>
