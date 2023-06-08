@@ -141,3 +141,11 @@
   border-style: solid;
   border-color: black;
 }
+
+math-field {
+  width: 150px;
+}
+
+.user-input-step > math-field {
+  width: 70px;
+}
