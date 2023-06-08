@@ -8,9 +8,12 @@ const getUserByUsername = (username) => {
   return User.findOne({username: username});
 };
 
-const getUserAndCheckPassword = (user) => {
-  User.findOne({username: user.username})
-    .then(userDoc => userDoc.comparePassword(user.password));   // returns null if pw doesn't match
+const getUserAndCheckPassword = async (user) => {
+  const userDoc = await User.findOne({username: user.username});
+  return [userDoc, await userDoc.comparePassword(user.password)];   // returns null if pw doesn't match
+//     .then(userDoc => {
+//       return await userDoc.comparePassword(user.password);   // returns null if pw doesn't match
+//     });
 }
 
 const addUser = (user) => {

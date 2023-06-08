@@ -9,12 +9,27 @@ const App = () => {
     const username = e.target.form.elements.userForSignup.value;
     const password = e.target.form.elements.passwordForSignup.value;
     const newUser = { username, password };
-    axios.post('users/signup', newUser)
+    axios.post('/signup', newUser)
       .then(res => {
         console.log(res);
+        setView('login');
       })
       .catch(err => console.log('error with signup'));
+  };
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    const username = e.target.form.elements.userForLogin.value;
+    const password = e.target.form.elements.passwordForLogin.value;
+    const user = { username, password };
+    axios.post('/login', user)
+      .then(res => {
+        console.log(res);
+        setView('equation');
+      })
+      .catch(err => console.log('error with login'));
   }
+
   return (
     <>
     <div className='nav-bar'>
@@ -39,6 +54,18 @@ const App = () => {
               <input id='passwordForSignup' type='text' required/>
             </label>
             <input type='submit' value='Sign Up' onClick={signUpHandler}/>
+          </form>
+        </div>
+      : view === 'login'
+      ? <div className='login'>
+          <form>
+            <label>Username:
+              <input id='userForLogin' type='text' required/>
+            </label>
+            <label>Password:
+              <input id='passwordForLogin' type='text' required/>
+            </label>
+            <input type='submit' value='Login' onClick={loginHandler}/>
           </form>
         </div>
       : null

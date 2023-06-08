@@ -28,10 +28,14 @@ userSchema.pre('save', function(next) {
   });
 });
 
-userSchema.methods.comparePassword = (candidatePassword) => {
-  return bcrypt.compare(candidatePassword, this.password)
-    .then(matched => matched ? this : null);
-};
+// userSchema.methods.comparePassword = async (candidatePassword) => {
+//   const matched = await bcrypt.compare(candidatePassword, this.password);
+//   return matched ? this : null;
+// };
+
+userSchema.methods.comparePassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+}
 
 const User = mongoose.model('User', userSchema);
 
