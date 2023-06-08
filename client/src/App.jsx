@@ -9,7 +9,11 @@ const App = () => {
     const username = e.target.form.elements.userForSignup.value;
     const password = e.target.form.elements.passwordForSignup.value;
     const newUser = { username, password };
-    axios.post('users/signup', newUser);
+    axios.post('users/signup', newUser)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log('error with signup'));
   }
   return (
     <>

@@ -23,14 +23,10 @@ router.post('/signup', (req, res) => {
   console.log('request received for newUser: ', newUser);
   getUserByUsername(newUser.username)
     .then(user => {
-      console.log('user already found: ', user);
       if (user) res.send(409);
       else {
         addUser(newUser)
-          .then((newUserDoc) => res.send({
-            body: newUserDoc,
-            statusCode: 201
-        }));
+          .then((newUserDoc) => res.send(newUserDoc.username, 201));
       }
     })
 });
