@@ -19,7 +19,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser( (user, done) => {
-  done(null, user.id);
+  done(null, user._id);
 });
 
 passport.deserializeUser( (id, done) => {
@@ -33,6 +33,17 @@ const authUser = require('./controllers/authUser.js');
 passport.use(new LocalStrategy(authUser));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+
+const checkAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) { return next() }
+  res.redirect("/login")
+}
+
+app.get('/status', (req, res) => {
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated()) res.send(req.session);
+  else res.send('not authenticated');
+});
 
 app.post('/login',
   passport.authenticate('local', {failureRedirect: '/'}),

@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Step from './components/Step.jsx';
 import axios from 'axios';
 
 const App = () => {
   const [view, setView] = useState('equation');
   const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    axios.get('/status')
+      .then(res => {
+        if (res.data.passport.user) setAuthenticated(true);
+      });
+    }, []);
+
   const signUpHandler = (e) => {
     e.preventDefault();
     const username = e.target.form.elements.userForSignup.value;
@@ -40,7 +48,7 @@ const App = () => {
     <div className='nav-bar'>
       <h3>Algebra Diagrammer</h3>
       <div className='nav-bar-right'>
-        <span>Saved Equations</span>
+        { authenticated && <span onClick={() => setView('saved')}>Saved Equations</span> }
         <span onClick={() => setView('signup')} >My Account</span>
       </div>
     </div>
