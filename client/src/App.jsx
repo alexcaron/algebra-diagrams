@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const App = () => {
   const [view, setView] = useState('equation');
+  const [authenticated, setAuthenticated] = useState(false);
   const signUpHandler = (e) => {
     e.preventDefault();
     const username = e.target.form.elements.userForSignup.value;
@@ -11,7 +12,6 @@ const App = () => {
     const newUser = { username, password };
     axios.post('/signup', newUser)
       .then(res => {
-        console.log(res);
         setView('login');
       })
       .catch(err => console.log('error with signup'));
@@ -24,8 +24,13 @@ const App = () => {
     const user = { username, password };
     axios.post('/login', user)
       .then(res => {
-        console.log(res);
-        setView('equation');
+        console.log('response from post, ', res);
+        if (res.data.passport.user) {
+          setAuthenticated(true);
+          setView('equation');
+        } else {
+          setView('login');
+        }
       })
       .catch(err => console.log('error with login'));
   }

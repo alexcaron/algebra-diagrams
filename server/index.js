@@ -35,10 +35,9 @@ passport.use(new LocalStrategy(authUser));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/failure'
-  }));
+  passport.authenticate('local', {failureRedirect: '/'}),
+  (req, res) => res.send(req.session)
+);
 
 app.post('/signup', (req, res) => {
   const newUser = req.body;
