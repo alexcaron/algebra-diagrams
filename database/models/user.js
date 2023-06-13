@@ -28,11 +28,6 @@ userSchema.pre('save', function(next) {
   });
 });
 
-// userSchema.methods.comparePassword = async (candidatePassword) => {
-//   const matched = await bcrypt.compare(candidatePassword, this.password);
-//   return matched ? this : null;
-// };
-
 userSchema.methods.comparePassword = async function(candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 }
