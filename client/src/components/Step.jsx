@@ -1,16 +1,32 @@
 import React, {useState} from 'react';
 import {ComputeEngine} from '@cortex-js/compute-engine';
 import Diagram from './Diagram.jsx';
+import axios from 'axios';
 const ce = new ComputeEngine();
 
-const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head = false, removeSelf = ()=>{} }) => {
+const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head = false, removeSelf = ()=>{}, authenticated=false, saveEquation=()=>{}}) => {
   const [inputEquation, setInputEquation] = useState(equationStart);
   const [displayEquation, setDisplayEquation] = useState(equationStart);
   const [hasNextStep, setHasNextStep] = useState(false);
   const [userDescriptionStep, setUserDescriptionStep] = useState('');
+  const [saveMessage, setSaveMessage] = useState('');
+  const saveHandler = () => {
+    if (inputEquation !== displayEquation) {
+      setSaveMessage('Show your latest equation before you can save your work.');
+      setTimeout(() => setSaveMessage(''), 5000);
+    } else if (!authenticated) {
+      setSaveMessage('Please login to save your work.');
+      setTimeout(() => setSaveMessage(''), 5000);
+    } else {
+      // next is null for now
+      saveEquation(displayEquation, null);
+    }
+  }
 
   return (
     <>
+    {head && <input type='button' value='Save' className='save-button' onClick={saveHandler}></input>}
+    <div className='alert-message'>{saveMessage}</div>
     <div className='step'>
       <div>
         {
