@@ -50,14 +50,17 @@ const App = () => {
   }
 
   const saveEquation = (equation, next) => {
-    console.log(userId);
-    axios.post('/equations', {userId: userId, equation: equation, next: next})
-      .then(() => {
-        axios.get(`/equations/${userId}`)
-          .then((res) => {
-            setSavedEquations(res.body);
-          })
+    axios.post('/equations', {userId: userId, equation: equation, next: next});
+  }
+
+  const saveViewHandler = () => {
+    axios.get(`/equations/${userId}`)
+      .then(res => {
+        return setSavedEquations(res.data);
       })
+      .then(() => {
+        setView('saved');
+      });
   }
 
   return (
@@ -65,7 +68,7 @@ const App = () => {
     <div className='nav-bar'>
       <h3 onClick={() => setView('equation')}>Algebra Diagrammer</h3>
       <div className='nav-bar-right'>
-        { authenticated && <span onClick={() => setView('saved')}>Saved Equations</span> }
+        { authenticated && <span onClick={saveViewHandler}>Saved Equations</span> }
         <span onClick={() => setView('login')} >My Account</span>
       </div>
     </div>
@@ -102,7 +105,7 @@ const App = () => {
         </div>
       : view === 'saved'
       ? <div>
-        {savedEquations.map(eq => <div>{eq}</div>)}
+        {savedEquations.map(eq => <div key={eq._id} >{eq.equation}</div>)}
       </div>
       : null
     }

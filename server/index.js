@@ -71,7 +71,10 @@ app.post('/equations', (req, res) => {
 
 app.get('/equations/:userId', (req, res) => {
   getEquationsForUserByUserId(req.params.userId)
-    .then((equations) => res.send(equations));
+    .then((equations) => {
+      console.log(equations);
+      res.send(equations);
+    });
 });
 
 app.listen(process.env.PORT, () => {
