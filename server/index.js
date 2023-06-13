@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const { getUserById, addUser, getUserByUsername, getUserAndCheckPassword } = require('../database/controllers/users');
+const { addEquation, getEquationsForUserByUserId, getEquationById, updateEquationById, deleteEquationById } = require('../database/controllers/equations');
 
 const app = express();
 
@@ -59,6 +60,13 @@ app.post('/signup', (req, res) => {
           .then((newUserDoc) => res.status(201).send(newUserDoc.username));
       }
     })
+});
+
+app.post('/equations', (req, res) => {
+  const userId = req.body.userId;
+  const equation = req.body.equation;
+  const next = req.body.next;
+  addEquation({userId, equation, next});
 });
 
 app.listen(process.env.PORT, () => {
