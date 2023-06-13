@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {ComputeEngine} from '@cortex-js/compute-engine';
 import Diagram from './Diagram.jsx';
+import axios from 'axios';
 const ce = new ComputeEngine();
 
-const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head = false, removeSelf = ()=>{} }) => {
+const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head = false, removeSelf = ()=>{}, authenticated=false, saveEquation=()=>{}}) => {
   const [inputEquation, setInputEquation] = useState(equationStart);
   const [displayEquation, setDisplayEquation] = useState(equationStart);
   const [hasNextStep, setHasNextStep] = useState(false);
@@ -11,8 +12,14 @@ const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head 
   const [saveMessage, setSaveMessage] = useState('');
   const saveHandler = () => {
     if (inputEquation !== displayEquation) {
-      setSaveMessage('Be sure to show your latest equation before you save.');
+      setSaveMessage('Show your latest equation before you can save your work.');
       setTimeout(() => setSaveMessage(''), 5000);
+    } else if (!authenticated) {
+      setSaveMessage('Please login to save your work.');
+      setTimeout(() => setSaveMessage(''), 5000);
+    } else {
+      // next is null for now
+      saveEquation(displayEquation, null);
     }
   }
 

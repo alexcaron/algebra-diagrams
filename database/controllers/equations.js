@@ -1,7 +1,11 @@
 const Equation = require('../models/equation.js');
 
 const addEquation = (userId, equation, next) => {
-  return Equation.create({userId, equation, next});
+  return Equation.create(
+    { userId: userId,
+      equation: JSON.stringify(equation),
+      next: JSON.stringify(next)
+    });
 }
 
 const getEquationsForUserByUserId = (userId) => {

@@ -179,3 +179,7 @@ math-field {
   text-align: center;
   font-size: smaller;
 }
+
+.no-account {
+  margin-top: 50px;
+}

@@ -66,7 +66,7 @@ app.post('/equations', (req, res) => {
   const userId = req.body.userId;
   const equation = req.body.equation;
   const next = req.body.next;
-  addEquation({userId, equation, next});
+  addEquation(userId, equation, next);
 });
 
 app.listen(process.env.PORT, () => {
