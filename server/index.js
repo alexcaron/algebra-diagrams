@@ -40,7 +40,6 @@ const checkAuthenticated = (req, res, next) => {
 }
 
 app.get('/status', (req, res) => {
-  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) res.send(req.session);
   else res.send('not authenticated');
 });
