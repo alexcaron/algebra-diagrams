@@ -8,10 +8,18 @@ const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head 
   const [displayEquation, setDisplayEquation] = useState(equationStart);
   const [hasNextStep, setHasNextStep] = useState(false);
   const [userDescriptionStep, setUserDescriptionStep] = useState('');
+  const [saveMessage, setSaveMessage] = useState('');
+  const saveHandler = () => {
+    if (inputEquation !== displayEquation) {
+      setSaveMessage('Be sure to show your latest equation before you save.');
+      setTimeout(() => setSaveMessage(''), 5000);
+    }
+  }
 
   return (
     <>
-    {head && <input type='button' value='Save' className='save-button'></input>}
+    {head && <input type='button' value='Save' className='save-button' onClick={saveHandler}></input>}
+    <div className='alert-message'>{saveMessage}</div>
     <div className='step'>
       <div>
         {
