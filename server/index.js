@@ -69,6 +69,11 @@ app.post('/equations', (req, res) => {
   addEquation(userId, equation, next);
 });
 
+app.get('/equations/:userId', (req, res) => {
+  getEquationsForUserByUserId(req.params.userId)
+    .then((equations) => res.send(equations));
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`listening on on port ${process.env.PORT}`);
 });

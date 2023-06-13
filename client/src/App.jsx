@@ -6,6 +6,7 @@ const App = () => {
   const [view, setView] = useState('equation');
   const [authenticated, setAuthenticated] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [savedEquations, setSavedEquations] = useState([]);
 
   useEffect(() => {
     axios.get('/status')
@@ -50,13 +51,19 @@ const App = () => {
 
   const saveEquation = (equation, next) => {
     console.log(userId);
-    axios.post('/equations', {userId: userId, equation: equation, next: next});
+    axios.post('/equations', {userId: userId, equation: equation, next: next})
+      .then(() => {
+        axios.get(`/equations/${userId}`)
+          .then((res) => {
+            setSavedEquations(res.body);
+          })
+      })
   }
 
   return (
     <>
     <div className='nav-bar'>
-      <h3>Algebra Diagrammer</h3>
+      <h3 onClick={() => setView('equation')}>Algebra Diagrammer</h3>
       <div className='nav-bar-right'>
         { authenticated && <span onClick={() => setView('saved')}>Saved Equations</span> }
         <span onClick={() => setView('login')} >My Account</span>
@@ -91,8 +98,12 @@ const App = () => {
             <input type='submit' value='Login' onClick={loginHandler}/>
           </form>
           <div className='no-account'>No account?</div>
-          <input type='button' value='Sign Up' onClick={signUpHandler}/>
+          <input type='button' value='Sign Up' onClick={() => setView('signup')}/>
         </div>
+      : view === 'saved'
+      ? <div>
+        {savedEquations.map(eq => <div>{eq}</div>)}
+      </div>
       : null
     }
     </>
