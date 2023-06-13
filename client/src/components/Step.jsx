@@ -11,6 +11,7 @@ const Step = ({equationStart = ["Equal",["Add",["Multiply",3,"x"],10],22], head 
 
   return (
     <>
+    {head && <input type='button' value='Save' className='save-button'></input>}
     <div className='step'>
       <div>
         {

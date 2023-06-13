@@ -9,7 +9,7 @@
 }
 
 .nav-bar-right {
-  width: 200px;
+  width: 300px;
   font-size: smaller;
   display: flex;
   justify-content: end;
@@ -148,4 +148,28 @@ math-field {
 
 .user-input-step > math-field {
   width: 70px;
+}
+
+.save-button, .add-step-button, .remove-step-button {
+  font-size: smaller;
+  border: 1px solid darkgray;
+}
+
+.save-button {
+  margin-left: auto;
+  margin-top: 30px;
+}
+
+.login, .signup {
+  margin-top: 60px;
+}
+
+.nav-bar-right > * {
+  margin-left: 15px;
+  padding: 10px;
+}
+
+.nav-bar-right > *:hover {
+  border: 1px solid darkgray;
+  border-radius: 2px;
 }
